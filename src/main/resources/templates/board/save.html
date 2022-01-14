@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BoardProject_save💜 </title>
+</head>
+<body>
+
+    <h2>save.html</h2>
+
+    <form action="/board/save" method="post">
+        <input type = "hidden" id="board_id" name="boardId" placeholder="작성자"><br>
+        <input type = "text" id="board_writer" name="boardWriter" placeholder="작성자"><br>
+        <input type = "text" id="board_password" name="boardPassword" placeholder="비밀번호"><br>
+        <p></p>
+      <!--  <input type="hidden" id="board_date" name="boardDate" placeholder="작성시간"><br>-->
+        <input type="text" id="board_title" name="boardTitle" placeholder="제목"><br>
+        <textarea id="board_contents" name="boardContents" placeholder="내용"></textarea><br>
+        <input type="submit" value="글쓰기">
+    </form>
+</body>
+</html>

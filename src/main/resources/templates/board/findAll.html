@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>board_findAll</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script> <!-- ajax를 위한 jquery -->
+<script>
+    function boardView(boardId)    {
+        console.log(boardId);
+        const reqUrl = "/board/"+boardId;
+
+        $.ajax({
+            type: 'post',
+            url: reqUrl,
+            dataType:'json',
+            success: function (result) {
+                console.log(result);
+                let output = "";
+                output += "<table>\n" +
+                    "<thead>\n" +
+                    "<tr>\n" +
+                    "   <th>번호</th>\n" +
+                    "   <th>제목</th>\n" +
+                    "   <th>작성자</th>\n" +
+                    "   <th>내용</th>\n" +
+
+                    "</tr>\n" +
+                    "</thead>\n" +
+                    "<tbody>" +
+                    "<tr>\n" +
+                    "   <td>" + result.boardId + "</td>\n" +
+                    "   <td>" + result.boardWriter + "</td>\n" +
+                    "   <td>" + result.boardTitle + "</td>\n" +
+                    "   <td>" + result.boardContents + "</td>\n" +
+                    "   <td>" + result.boardDate + "</td>\n" +
+                    "</tr>\n" +
+                    "</tbody>\n" +
+                    "</table>"
+                document.getElementById("detail-view").innerHTML = output;
+            },
+            error: function ()  {
+                alert("ajax실패");
+
+            }
+
+        })
+    }
+
+
+</script>
+<body>
+<h2> findAll.html </h2>
+    <table>
+        <thead>
+            <tr>
+                <th> 글번호 </th>
+                <th> 제목 </th>
+                <th> 조회ajax💜 </th>
+                <th> 작성자 </th>
+                <th> 작성일 </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="board: ${boardList}">
+                <td th:text="${board.boardId}"></td>
+                <td><a th:href="@{|/board/${board.boardId}|}"><span th:text="${board.boardTitle}"></span></a></td>
+                <td><button th:onclick="boardView([[${board.boardId}]])">조회ajax</button></td>
+                <td th:text="${board.boardWriter}"></td>
+                <td th:text="${board.boardDate}"></td>
+                <!-- 제목 클릭하면 상세조회화면(findById.html)출력 -->
+                <!-- ajax를 이용한 상세조회를 해봅시다. 조회 버튼을 클릭하면 목록 아래에 해당 글의 상세 내용이 출력되도록! -->
+            </tr>
+        </tbody>
+
+    </table>
+<div id="detail-view"></div>
+</body>
+</html>

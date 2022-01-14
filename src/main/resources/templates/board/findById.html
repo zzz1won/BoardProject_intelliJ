@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>boardProject_findById</title>
+</head>
+<body>
+<h2>findById</h2>
+<table>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>글내용</th>
+        <th>작성일</th>
+
+    </tr>
+    <tr>
+        <td th:text="${board.boardId}"></td>
+        <td th:text="${board.boardTitle}"></td>
+        <td th:text="${board.boardWriter}"></td>
+        <td th:text="${board.boardContents}"></td>
+        <td th:text="${board.boardDate}"></td>
+        <!-- 수정기능을 만들어봅시다. 수정화면(update.html)에서 비밀번호를 입력받고 일치하면 수정처리
+         일치하지 않을 시 수정처리를 하지 않음.
+         수정처리 1, post방식(폼에서 바로 요청하는 방식! save, login처럼)
+                2, put방식 (ajax를 이용하여 요청하는) 두가지 방식
+                수정이 완료되면 수정 후 상세페이지를 출력합니다...-->
+    </tr>
+</table>
+
+${board.boardContents}
+흠냐리
+<a th:href = "@{|/board/update/${board.boardId}|}"> 수정1 </a>
+</body>
+</html>
