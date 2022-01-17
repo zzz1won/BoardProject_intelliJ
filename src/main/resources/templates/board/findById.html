@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>boardProject_findById</title>
 </head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script> <!-- ajax를 위한 jquery -->
+
 <body>
 <h2>findById</h2>
 <table>
@@ -32,5 +34,57 @@
 ${board.boardContents}
 흠냐리
 <a th:href = "@{|/board/update/${board.boardId}|}"> 수정1 </a>
+
+<div id="comment-write">
+    <input type = "text" id="commentWriter" placeholder="작성자"><br>
+    <textarea id="commentContents" placeholder="내용"></textarea><br>
+    <button id = "comment-write-btn"> 댓글등록 </button>
+</div>
+
+<div id="comment-area">
+    <table>
+        <thead>
+        <tr>
+            <th>댓글번호</th>
+            <th>작성자</th>
+            <th>내용</th>
+            <th>작성시간</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+
 </body>
+<script> //댓글버튼... 버튼을 클릭했을 때 1. 온클릭으로 호출하는 방식, 2.버튼이 있고 스크립트를 이용헤 이벤트리스너로 실행
+//2의 경우는 모든 html이 로딩이 된 후에 실행하기때문에 해당 스크립트 구문이 deeper없이 상단에서 사용하게 되면 오류가 나니 하단에 작성하는 것!
+    $("#comment-write-btn").click(function(){
+        console.log('댓글 등록 버튼 클릭❤');
+
+        const commentWriter = $("#commentWriter").val();
+        const commentContents = $("#commentContents").val();
+        const boardId = '[[${board.boardId}]]';
+
+        $.ajax({
+            type : 'post',
+            url : '/comment/save',
+            data: {
+                'commentWirter': commentWriter,
+                'commentContents': commentContents,
+                'boardId': boardId
+            },
+            dataType : 'json',
+            success: function (result)  {
+                console.log(result);
+            },
+            error: function ()  {
+                alert('ajax실패');
+            }
+        });
+
+    });
+
+</script>
 </html>

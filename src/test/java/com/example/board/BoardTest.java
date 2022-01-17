@@ -3,6 +3,7 @@ package com.example.board;
 import com.example.board.common.PagingConst;
 import com.example.board.dto.BoardPageingDTO;
 import com.example.board.dto.BoardSaveDTO;
+import com.example.board.dto.MemberSaveDTO;
 import com.example.board.entity.BoardEntity;
 import com.example.board.repository.BoardRepository;
 import com.example.board.service.BoardService;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -32,7 +34,7 @@ public class BoardTest {
     public void newBoard()  {
         //IntStream을 이용하여 새글 30개 DB에 저장해놓자~
         //글 목록 출력하는 것 까지 진행하기...
-        IntStream.rangeClosed(1,20).forEach( i-> {
+        IntStream.rangeClosed(1,10).forEach( i-> {
             bs.save(new BoardSaveDTO("writer" + i, "pw" + i, "title" + i, "contents" + i));
         });
     }
@@ -93,4 +95,22 @@ public class BoardTest {
 
     }
 
+
+
+    @Test
+    @Transactional
+    @Rollback(value = false)
+    @DisplayName("게시글 삭제")
+    public void boardDelete()   {
+       /* br.deleteById(1L); // 다짜고짜 이렇게 써버리면! 자식(참조하는 자료)이 있어서 삭제할 수 없음*/
+        br.deleteById(2L);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(value = false)
+    @DisplayName("멤버가 게시글 작성")
+    public void memberWriteTest()   {
+        bs.save()
+    }
 }
