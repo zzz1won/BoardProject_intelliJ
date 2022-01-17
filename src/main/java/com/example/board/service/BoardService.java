@@ -1,16 +1,14 @@
 package com.example.board.service;
 
-import com.example.board.dto.BoardDetailDTO;
-import com.example.board.dto.BoardPageingDTO;
-import com.example.board.dto.BoardSaveDTO;
-import com.example.board.dto.BoardUpdateDTO;
+import com.example.board.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface BoardService {
-    Long save(BoardSaveDTO boardSaveDTO);
+    /*Long save(BoardSaveDTO boardSaveDTO);*/
+    Long save(BoardWriteDTO boardWriteDTO);
 
     List<BoardDetailDTO> findAll();
 

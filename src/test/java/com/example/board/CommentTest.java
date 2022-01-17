@@ -22,20 +22,20 @@ import java.util.stream.IntStream;
 @SpringBootTest
 public class CommentTest {
     @Autowired
-    CommentService cs;
+    private CommentService cs;
     @Autowired
-    CommentRepository cr;
+    private CommentRepository cr;
     @Autowired
-    BoardService bs;
+    private BoardService bs;
     @Autowired
-    BoardRepository br;
-
+    private BoardRepository br;
+    /*
     @Test
     /*@Transactional //참조관계에 있을 경우 transactional을 꼭 써줘야함...*/
     //근데 왜 이거 쓰면 글이 다 사라지는?...
     @DisplayName("댓글작성 테스트코드")
     public void commentTest() {
-
+/*
         //1. 게시글
         Long boardId = bs.save(new BoardSaveDTO("writer", "pw" , "title" , "contents"));
         Long boardId2 = bs.save(new BoardSaveDTO("writer", "pw" , "title" , "contents"));
@@ -51,7 +51,7 @@ public class CommentTest {
         cs.save(new CommentSaveDTO(boardId3, "write", "contents"));
         cs.save(new CommentSaveDTO(boardId3, "write", "contents"));
         cs.save(new CommentSaveDTO(boardId4, "write", "contents"));
-
+*/
 
        /* IntStream.rangeClosed(1,3).forEach(i->{
             cs.save(new CommentSaveDTO((long) i, "작성자"+i, "내용"+i));
@@ -59,7 +59,7 @@ public class CommentTest {
         //when
         //then
     }
-
+/*
     @Test
     @Transactional
     @Rollback(value = false) //이러면 rollback 되지않음...
@@ -101,5 +101,5 @@ public class CommentTest {
             System.out.println("c.toString() = " + c.toString());
         }
     }
-
+*/
 }

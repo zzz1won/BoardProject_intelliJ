@@ -1,6 +1,5 @@
 package com.example.board.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardSaveDTO {
+public class BoardWriteDTO {
     /*private Long Id;*/
     private String boardWriter;
     private String boardPassword;
@@ -20,11 +19,13 @@ public class BoardSaveDTO {
 
     private Long memberId;
 
-    public BoardSaveDTO(String boardWriter, String boardPassword, String boardTitle, String boardContents) {
+
+    public BoardWriteDTO(String boardWriter, String boardPassword, String boardTitle, String boardContents, Long memberId) {
         this.boardWriter = boardWriter;
         this.boardPassword = boardPassword;
         this.boardTitle = boardTitle;
         this.boardContents = boardContents;
+        this.memberId = memberId;
     }
 
 }

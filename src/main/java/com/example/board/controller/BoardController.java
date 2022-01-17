@@ -1,10 +1,7 @@
 package com.example.board.controller;
 
 import com.example.board.common.PagingConst;
-import com.example.board.dto.BoardDetailDTO;
-import com.example.board.dto.BoardPageingDTO;
-import com.example.board.dto.BoardSaveDTO;
-import com.example.board.dto.BoardUpdateDTO;
+import com.example.board.dto.*;
 import com.example.board.service.BoardService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -36,12 +33,19 @@ public class BoardController {
         return "/board/save";
     }
 
-    @PostMapping("/save")
+    /*@PostMapping("/save")
         public String save(@ModelAttribute BoardSaveDTO boardSaveDTO)    {
             System.out.println("BoardController.save");
             Long boardId = bs.save(boardSaveDTO);
             return "redirect:/board/";
-        }
+        }*/
+
+    @PostMapping("/save")
+    public String save(@ModelAttribute BoardWriteDTO boardWriteDTO)    {
+        System.out.println("BoardController.save");
+        Long boardId = bs.save(boardWriteDTO);
+        return "redirect:/board/";
+    }
 
 
     @GetMapping("/")

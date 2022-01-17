@@ -3,10 +3,12 @@ package com.example.board;
 import com.example.board.common.PagingConst;
 import com.example.board.dto.BoardPageingDTO;
 import com.example.board.dto.BoardSaveDTO;
+import com.example.board.dto.BoardWriteDTO;
 import com.example.board.dto.MemberSaveDTO;
 import com.example.board.entity.BoardEntity;
 import com.example.board.repository.BoardRepository;
 import com.example.board.service.BoardService;
+import com.example.board.service.MemberService;
 import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,8 +29,12 @@ public class BoardTest {
     private BoardService bs;
 
     @Autowired
+    private MemberService ms;
+
+    @Autowired
     private BoardRepository br;
 
+    /*
     @Test
     @DisplayName("게시글 생성test")
     public void newBoard()  {
@@ -37,7 +43,7 @@ public class BoardTest {
         IntStream.rangeClosed(1,10).forEach( i-> {
             bs.save(new BoardSaveDTO("writer" + i, "pw" + i, "title" + i, "contents" + i));
         });
-    }
+    }*/
 
     @Test
     @DisplayName("게시글 수정test")
@@ -111,6 +117,22 @@ public class BoardTest {
     @Rollback(value = false)
     @DisplayName("멤버가 게시글 작성")
     public void memberWriteTest()   {
-        bs.save()
+        //1. 회원가입
+        MemberSaveDTO memberSaveDTO = new MemberSaveDTO("메일11","비번11","이름11");
+        Long memberId1 = ms.save(memberSaveDTO);
+        memberSaveDTO = new MemberSaveDTO("메일12","비번12","이름12");
+        Long memberId2 = ms.save(memberSaveDTO);
+        memberSaveDTO = new MemberSaveDTO("메일13","비번13","이름13");
+        Long memberId3 = ms.save(memberSaveDTO);
+
+        //앗 unique 안줬다
+
+        //2. 글쓰기
+        BoardWriteDTO boardWriteDTO = new BoardWriteDTO("메일1","비번1","제목1","내용1",memberId1);
+        bs.save(boardWriteDTO);
+        boardWriteDTO = new BoardWriteDTO(memberSaveDTO.getMemberEmail(), memberSaveDTO.getMemberPassword(), "제목1","내용1",memberId3);
+        bs.save(boardWriteDTO);
     }
+
+
 }

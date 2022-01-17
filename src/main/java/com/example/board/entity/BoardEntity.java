@@ -1,12 +1,13 @@
 package com.example.board.entity;
 
-import com.example.board.dto.BoardDetailDTO;
 import com.example.board.dto.BoardSaveDTO;
 import com.example.board.dto.BoardUpdateDTO;
+import com.example.board.dto.BoardWriteDTO;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +77,17 @@ public class BoardEntity extends BaseEntity{
         return boardEntity;
     }
 
+    public static BoardEntity writeBoard(BoardWriteDTO boardWriteDTO, MemberEntity memberEntity) {
+        BoardEntity boardEntity = new BoardEntity();
+
+        boardEntity.setBoardWriter(boardWriteDTO.getBoardWriter());
+        boardEntity.setBoardPassword(boardWriteDTO.getBoardPassword());
+        boardEntity.setBoardTitle(boardWriteDTO.getBoardTitle());
+        boardEntity.setBoardContents(boardWriteDTO.getBoardContents());
+        boardEntity.setMemberEntity(memberEntity);
+
+        return boardEntity;
+    }
 
 
 }

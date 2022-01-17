@@ -1,12 +1,11 @@
 package com.example.board.service;
 
 import com.example.board.common.PagingConst;
-import com.example.board.dto.BoardDetailDTO;
-import com.example.board.dto.BoardPageingDTO;
-import com.example.board.dto.BoardSaveDTO;
-import com.example.board.dto.BoardUpdateDTO;
+import com.example.board.dto.*;
 import com.example.board.entity.BoardEntity;
+import com.example.board.entity.MemberEntity;
 import com.example.board.repository.BoardRepository;
+import com.example.board.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,11 +22,19 @@ import java.util.Optional;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardRepository br;
+    private final MemberRepository mr;
 
-    @Override
+    /*@Override
     public Long save(BoardSaveDTO boardSaveDTO) {
         System.out.println("BoardSerivceImpl.save");
         BoardEntity boardEntity = BoardEntity.saveBoard(boardSaveDTO);
+        return br.save(boardEntity).getId();
+    }*/
+
+    @Override
+    public Long save(BoardWriteDTO boardWriteDTO) {
+        MemberEntity memberEntity = mr.findById(boardWriteDTO.getMemberId()).get();
+        BoardEntity boardEntity = BoardEntity.writeBoard(boardWriteDTO, memberEntity);
         return br.save(boardEntity).getId();
     }
 

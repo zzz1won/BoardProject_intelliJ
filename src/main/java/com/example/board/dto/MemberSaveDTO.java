@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class MemberSaveDTO {
-    private Long memberId; //얘를 읽는가보다
+    /*private Long memberId; //얘를 읽는가보다*/
     public String memberEmail;
     public String memberPassword;
     public String memberName;
